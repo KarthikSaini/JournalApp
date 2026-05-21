@@ -27,11 +27,6 @@ public class JournalEntryController {
 		return new ArrayList<>(journalEntry.values());
 	}
 	
-	@GetMapping("/getAll")
-	public List<JournalEntry> getAllEntries(){
-		return new ArrayList<>(journalEntry.values());
-	}
-	
 	@PostMapping
 	public boolean createEntry(@RequestBody JournalEntry myEntry) {
 		journalEntry.put(myEntry.getId(), myEntry);

@@ -1,15 +1,32 @@
 package com.journalApp.entity;
 
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collation="journal_entries")
 public class JournalEntry {
-	private long id;
+	
+	@Id
+	private String id;
 	private String tittle;
 	private String content;
+	private Date date;
 	
-	public long getId() {
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

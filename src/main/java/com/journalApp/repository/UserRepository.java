@@ -4,9 +4,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
-import com.journalApp.entity.JournalEntry;
+import com.journalApp.entity.User;
 
 @Service
-public interface JournalEntryRepository extends MongoRepository<JournalEntry, ObjectId> {
+public interface UserRepository extends MongoRepository<User, ObjectId> {
+	
+	User findByUsername(String username);
 
 }

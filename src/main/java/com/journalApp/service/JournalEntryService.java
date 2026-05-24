@@ -1,5 +1,9 @@
 package com.journalApp.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,12 +18,20 @@ public class JournalEntryService {
 	
 	public void saveEntry(JournalEntry journalEntry) {
 		JournalEntry savedEntry = journalEntryRepository.save(journalEntry);
-		System.out.println(savedEntry.getContent()+"  "+savedEntry.getId());
+//		System.out.println(savedEntry.getContent()+"  "+savedEntry.getId());
 	}
 	
-	public JournalEntry getAllEntry() {
-		JournalEntry savedEntry = (JournalEntry) journalEntryRepository.findAll();
+	public List<JournalEntry> getAllEntry() {
+		List<JournalEntry> savedEntry = journalEntryRepository.findAll();
 		return savedEntry;
+	}
+	
+	public Optional<JournalEntry> findById(ObjectId id) {
+		return journalEntryRepository.findById(id);
+	}
+	
+	public void deleteById(ObjectId id) {
+		journalEntryRepository.deleteById(id);
 	}
 	
 }

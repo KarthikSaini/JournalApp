@@ -50,6 +50,6 @@ public class UserController {
 	@DeleteMapping
 	public ResponseEntity<?> deleteUser(@RequestBody User user){
 		userService.deleteById(user.getId());
-		return new ResponseEntity<>(HttpStatus.);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

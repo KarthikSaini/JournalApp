@@ -44,9 +44,9 @@ public class JournalEntryControllerV2 {
 	}
 	
 	
-	@GetMapping("{username}")
-	public ResponseEntity<?> getAll(@PathVariable String username){
-		User user = userService.findById(username);
+	@GetMapping("{userName}")
+	public ResponseEntity<?> getAll(@PathVariable String userName){
+		User user = userService.findById(userName);
 		List<JournalEntry> allEntry = user.getJournalEntries();
 		if(allEntry != null && !allEntry.isEmpty()) {
 			return new ResponseEntity<>(allEntry,HttpStatus.OK);
@@ -54,11 +54,11 @@ public class JournalEntryControllerV2 {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@PostMapping
-	public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry) {
+	@PostMapping("{userName}")
+	public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry, @PathVariable String userName) {
 		try {
 			myEntry.setDate(LocalDateTime.now());
-			journalEntryService.saveEntry(myEntry);
+			journalEntryService.saveEntry(myEntry, userName);
 			return new ResponseEntity<>(myEntry,HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -75,14 +75,16 @@ public class JournalEntryControllerV2 {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@DeleteMapping("/id/{myId}")
-	public ResponseEntity<?> deleteJournalEntryById(@PathVariable ObjectId myId) {
-		journalEntryService.deleteById(myId);
+	@DeleteMapping("/id/{userName}/{myId}")
+	public ResponseEntity<?> deleteJournalEntryById(@PathVariable ObjectId myId, @PathVariable String userName) {
+		journalEntryService.deleteById(myId, userName);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
-	@PutMapping("/id/{myId}")
-	public ResponseEntity<?> updateJournalEntryById(@PathVariable ObjectId myId, @RequestBody JournalEntry newEntry) {
+	@PutMapping("/id/{userName}/{myId}")
+	public ResponseEntity<?> updateJournalEntryById(@PathVariable ObjectId myId,
+			@RequestBody JournalEntry newEntry,
+			@PathVariable String userName) {
 		try {
 			JournalEntry oldEntry = journalEntryService.findById(myId).orElse(null);
 			if(oldEntry != null) {

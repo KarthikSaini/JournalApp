@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.journalApp.entity.JournalEntry;
 import com.journalApp.entity.User;
@@ -21,6 +22,8 @@ public class JournalEntryService {
 	@Autowired
 	private UserService userService;
 	
+	// Make function Transactional so it can achieve the atomiticity 	
+	@Transactional
 	public void saveEntry(JournalEntry journalEntry, String userName) {
 		User user = userService.findById(userName);
 		journalEntry.setDate(LocalDateTime.now());

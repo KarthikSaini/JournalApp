@@ -3,6 +3,8 @@ package com.journalApp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,10 +17,49 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.journalApp.entity.User;
 import com.journalApp.service.UserService;
+import com.mongodb.client.MongoClient;
+
+import jakarta.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
+//	@PostConstruct
+//	public void checkDb() {
+//	    System.out.println("Connected DB: " + mongoTemplate.getDb().getName());
+//	}
+	
+	
+	@Autowired
+	private MongoDatabaseFactory mongoDatabaseFactory;
+
+	@PostConstruct
+	public void checkDb() {
+	    System.out.println("MongoTemplate DB: " + mongoTemplate.getDb().getName());
+
+	    try {
+	        System.out.println("Factory DB: " +
+	                mongoDatabaseFactory.getMongoDatabase().getName());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	@Autowired
+	private MongoClient mongoClient;
+
+	@PostConstruct
+	public void checkServer() {
+		System.out.println();
+	    System.out.println("mongoClient.getClusterDescription    "+
+	        mongoClient.getClusterDescription()
+	    );
+	    System.out.println();
+	}
 
 	@Autowired
 	private UserService userService;

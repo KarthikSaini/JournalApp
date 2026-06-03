@@ -25,8 +25,8 @@ import jakarta.annotation.PostConstruct;
 @RequestMapping("/user")
 public class UserController {
 	
-	@Autowired
-	private MongoTemplate mongoTemplate;
+//	@Autowired
+//	private MongoTemplate mongoTemplate;
 
 //	@PostConstruct
 //	public void checkDb() {
@@ -34,32 +34,32 @@ public class UserController {
 //	}
 	
 	
-	@Autowired
-	private MongoDatabaseFactory mongoDatabaseFactory;
-
-	@PostConstruct
-	public void checkDb() {
-	    System.out.println("MongoTemplate DB: " + mongoTemplate.getDb().getName());
-
-	    try {
-	        System.out.println("Factory DB: " +
-	                mongoDatabaseFactory.getMongoDatabase().getName());
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
+//	@Autowired
+//	private MongoDatabaseFactory mongoDatabaseFactory;
+//
+//	@PostConstruct
+//	public void checkDb() {
+//	    System.out.println("MongoTemplate DB: " + mongoTemplate.getDb().getName());
+//
+//	    try {
+//	        System.out.println("Factory DB: " +
+//	                mongoDatabaseFactory.getMongoDatabase().getName());
+//	    } catch (Exception e) {
+//	        e.printStackTrace();
+//	    }
+//	}
 	
-	@Autowired
-	private MongoClient mongoClient;
-
-	@PostConstruct
-	public void checkServer() {
-		System.out.println();
-	    System.out.println("mongoClient.getClusterDescription    "+
-	        mongoClient.getClusterDescription()
-	    );
-	    System.out.println();
-	}
+//	@Autowired
+//	private MongoClient mongoClient;
+//
+//	@PostConstruct
+//	public void checkServer() {
+//		System.out.println();
+//	    System.out.println("mongoClient.getClusterDescription    "+
+//	        mongoClient.getClusterDescription()
+//	    );
+//	    System.out.println();
+//	}
 
 	@Autowired
 	private UserService userService;

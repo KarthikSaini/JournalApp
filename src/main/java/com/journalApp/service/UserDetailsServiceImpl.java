@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 	
-//	Learning Kafka Day 3
+//	Learning MySql
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

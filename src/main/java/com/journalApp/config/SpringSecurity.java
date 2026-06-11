@@ -20,7 +20,7 @@ public class SpringSecurity {
 
 	        http
 	            .authorizeHttpRequests(auth -> auth
-	                .requestMatchers("/public/**").permitAll()
+	                .requestMatchers("/journal/**").permitAll()
 	                .anyRequest().authenticated()
 	            )
 	            .formLogin(Customizer.withDefaults());
